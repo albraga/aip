@@ -1,5 +1,5 @@
 
-package planning;
+package mc;
 
 public class Action {
     
@@ -8,7 +8,7 @@ public class Action {
     public static State moveR(State state, int m, int c) {
         int[] s = state.getS();
         int b = 1;
-        if (s[2] == 1 && m + c < 3 && m + c > 0 && m >= s[0] && c >= s[1]) {
+        if (s[2] == 1 && m + c < 3 && m + c > 0) {
             s[0] -= m;
             s[1] -= c;
             s[2] -= b;
