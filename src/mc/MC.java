@@ -26,15 +26,15 @@ public class MC {
             int n = 1;
             sts[ii] = new int[]{a, b, c, d, e, f, g, h, i, j, k, l, m, n};
         }
-        List<int[]> stL = new ArrayList<>();
+        List<int[]> stList = new ArrayList<>();
         for (int[] s : sts) {
-            if(s[8] >= s[9]) {
-                stL.add(s);
+            if(s[8] >= s[9] && s[11] >= s[12]) {
+                stList.add(s);
             }
         }
-        int[][] filtered = new int[stL.size()][14];
-        for (int i = 0; i < stL.size(); i++) {
-            filtered[i] = stL.get(i);
+        int[][] filtered = new int[stList.size()][14];
+        for (int i = 0; i < stList.size(); i++) {
+            filtered[i] = stList.get(i);
         }
         return filtered;
     }
@@ -58,15 +58,15 @@ public class MC {
             int n = 0;
             sts[ii] = new int[]{a, b, c, d, e, f, g, h, i, j, k, l, m, n};
         }
-        List<int[]> stL = new ArrayList<>();
+        List<int[]> stLeft = new ArrayList<>();
         for (int[] s : sts) {
-            if(s[11] >= s[12]) {
-                stL.add(s);
+            if(s[8] >= s[9] && s[11] >= s[12]) {
+                stLeft.add(s);
             }
         }
-        int[][] filtered = new int[stL.size()][14];
-        for (int i = 0; i < stL.size(); i++) {
-            filtered[i] = stL.get(i);
+        int[][] filtered = new int[stLeft.size()][14];
+        for (int i = 0; i < stLeft.size(); i++) {
+            filtered[i] = stLeft.get(i);
         }
         return filtered;
     }
