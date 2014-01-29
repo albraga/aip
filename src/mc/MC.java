@@ -25,9 +25,9 @@ public class MC {
             return;
         }
 
-        lList.addLast(removeParent(moveL(lList.getLast())));
+        List<int[]> ml = moveL(lList.getLast());
 
-        search(lList.getLast());
+        search(ml);
     }
 
     private boolean isGoal(List<int[]> sList) {
