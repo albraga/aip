@@ -9,28 +9,25 @@ import java.util.LinkedList;
 public class MC {
 
     private static final int[][] ACT = {{0, 1, 1}, {1, 0, 1}, {1, 1, 1}, {0, 2, 1}, {2, 0, 1}};
-    private static LinkedList<List<int[]>> lList = new LinkedList<>();
+    private static final LinkedList<List<int[]>> lList = new LinkedList<>();
 
     public void search(List<int[]> sList) {
-        lList.addLast(removeDup(sList));
-        for (int[] s : lList.getLast()) {
-            System.out.println(s[0] + " " + s[1] + " " + s[2] + " " + s[3] + " " + s[4] + " " + s[5]);
-        }
-        System.out.println("////////////////////////////////////////////////////////////");
-        lList.addLast(removeDup(moveR(lList.getLast())));
+        lList.addLast(removeParent(sList));
+
+        lList.addLast(removeParent(moveR(lList.getLast())));
         if (isGoal(lList.getLast())) {
+            for (List<int[]> ll : lList) {
+                System.out.println("///////////////////////////////////////////////////////////////");
+                for (int[] s : ll) {
+                    System.out.println(s[0] + " " + s[1] + " " + s[2] + " " + s[3] + " " + s[4] + " " + s[5]);
+                }
+            }
             return;
         }
-        for (int[] s : lList.getLast()) {
-            System.out.println(s[0] + " " + s[1] + " " + s[2] + " " + s[3] + " " + s[4] + " " + s[5]);
-        }
-        System.out.println("////////////////////////////////////////////////////////////");
-        List<int[]> ml = removeDup(moveL(removeDup(lList.getLast())));
 
-        for (int[] s : ml) {
-            System.out.println(s[0] + " " + s[1] + " " + s[2] + " " + s[3] + " " + s[4] + " " + s[5]);
-        }
-        search(ml);
+        lList.addLast(removeParent(moveL(lList.getLast())));
+
+        search(lList.getLast());
     }
 
     private boolean isGoal(List<int[]> sList) {
@@ -87,26 +84,33 @@ public class MC {
     }
 
     private List<int[]> removeDup(List<int[]> list) {
-        HashSet<int[]> hs = new HashSet<>();
-        hs.addAll(list);
-        list.clear();
-        list.addAll(hs);
+        List<int[]> lst = new ArrayList<>();
+        int count = 0;
+        for (int[] stt : list) {
+            for (int[] st : list) {
+                if (Arrays.equals(st, stt)) {
+                    count++;
+                    if (count > 1) {
+                        lst.add(st);
+                    }
+                }
+            }
+            count = 0;
+        }
+        for (int[] d : lst) {
+            list.remove(d);
+        }
         return list;
     }
 
-    private List<int[]> removeParent(List<int[]> grandpa, List<int[]> parent, List<int[]> child) {
+    private List<int[]> removeParent(List<int[]> child) {
         List<int[]> dup = new ArrayList<>();
-        for (int[] p : parent) {
-            for (int[] c : child) {
-                if (Arrays.equals(c, p)) {
-                    dup.add(c);
-                }
-            }
-        }
-        for (int[] pa : grandpa) {
-            for (int[] c : child) {
-                if (Arrays.equals(c, pa)) {
-                    dup.add(c);
+        for (int i = 0; i < lList.size() - 1; i++) {
+            for (int ii = 0; ii < lList.get(i).size(); ii++) {
+                for (int[] c : child) {
+                    if (Arrays.equals(c, lList.get(i).get(ii))) {
+                        dup.add(c);
+                    }
                 }
             }
         }
