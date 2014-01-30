@@ -3,7 +3,6 @@ package mc;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class MC {
@@ -17,7 +16,7 @@ public class MC {
         lList.addLast(removeParent(moveR(lList.getLast())));
         if (isGoal(lList.getLast())) {
             for (List<int[]> ll : lList) {
-                System.out.println("///////////////////////////////////////////////////////////////");
+                System.out.println("////////////");
                 for (int[] s : ll) {
                     System.out.println(s[0] + " " + s[1] + " " + s[2] + " " + s[3] + " " + s[4] + " " + s[5]);
                 }
@@ -51,10 +50,9 @@ public class MC {
                 sTemp[4] = sIn[4] + ACT[i][1];
                 sTemp[5] = sIn[5] + ACT[i][2];
                 if (sTemp[0] <= 3 && sTemp[0] >= 0 && sTemp[1] <= 3 && sTemp[1] >= 0 && sTemp[2] <= 1 && sTemp[2] >= 0) {
-                    if (sTemp[0] >= sTemp[1] || sTemp[0] == 0 && sTemp[3] >= sTemp[4] || sTemp[3] == 0) {
+                    if ((sTemp[0] >= sTemp[1] || sTemp[0] == 0) && (sTemp[3] >= sTemp[4] || sTemp[3] == 0)) {
                         sList.add(sTemp);
                     }
-
                 }
             }
         }
@@ -73,10 +71,9 @@ public class MC {
                 sTemp[4] = sIn[4] - ACT[i][1];
                 sTemp[5] = sIn[5] - ACT[i][2];
                 if (sTemp[0] <= 3 && sTemp[0] >= 0 && sTemp[1] <= 3 && sTemp[1] >= 0 && sTemp[2] <= 1 && sTemp[2] >= 0) {
-                    if (sTemp[0] >= sTemp[1] || sTemp[0] == 0 && sTemp[3] >= sTemp[4] || sTemp[3] == 0) {
+                    if ((sTemp[0] >= sTemp[1] || sTemp[0] == 0) && (sTemp[3] >= sTemp[4] || sTemp[3] == 0)) {
                         sList.add(sTemp);
                     }
-
                 }
             }
         }
